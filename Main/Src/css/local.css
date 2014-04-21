@@ -1,0 +1,23 @@
+﻿body{
+    font-size:0.75em;
+    font-family:Verdana;
+    font-weight:normal;
+    font-style:normal
+}
+
+
+.group_header {
+    background: #00aedb;
+    padding: 0.2em;
+    color: white;
+}
+
+.group_content {
+    border:solid 1px #00aedb;
+    right:0px;
+    left:0px;
+}
+
+span{
+    margin:2px;
+}

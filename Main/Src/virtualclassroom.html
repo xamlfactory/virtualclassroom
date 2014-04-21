@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="http://knockoutjs.com/downloads/knockout-3.0.0.js"></script>
+    <script src="js/jquery-ui-1.10.4.custom.js"></script>
+    <script src="Scripts/jquery.layout-latest.js"></script>
+    <script src="Scripts/chatviewmodel.js"></script>
+    <script src="Scripts/app.js"></script>
+    <script src="theme/js/jquery-ui-1.10.4.custom.js"></script>
+    <link href="theme/css/metro-theme/jquery-ui-1.10.4.custom.css" rel="stylesheet" />
+    <link href="CSS/local.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="ui-layout-north" style="background-color:gray">
+    </div>
+    <div class="ui-layout-east">
+        <div id="conferenceview" class="group_content" style="height:150px;position:absolute; top: 0px">
+            <div>
+                <div class="group_header">
+                    <span>Video Conference</span>
+                </div>
+            </div>
+        </div>
+        <div id="usersview" class="group_content" style="top:150px;bottom:280px;position:absolute">
+            <div>
+                <div class="group_header">
+                    <span>Connected Users</span>
+                </div>
+                <div>
+
+                </div>
+            </div>
+        </div>
+        <div id="chatview" class="group_content" style="height:280px;position:absolute;bottom:0px"
+             data-bind="with: chatViewModel">
+            <div class="group_header">
+                <span data-bind="text: title"></span>
+            </div>
+            <div style="padding:0.2em">
+                <div data-bind="foreach: messages" style="height:150px;overflow:auto">
+                    <div>
+                        <span style="font-weight:bold" data-bind="text: sender"></span>
+                        <span style="float:right;color:gray" data-bind="text: date"></span>
+                        <br />
+                        <span style="word-wrap:normal" data-bind="text: message"></span>
+                        <br />
+                        <br />
+                    </div>
+                </div>
+                <div style="height:30px;margin:2px">
+                    <select data-bind="options: $parent.users, optionsText: 'name'"
+                            style="width:100px"></select>
+                </div>
+                <div style="height:50px;margin:2px;display:grid">
+                    <textarea rows="3" autofocus="autofocus" placeholder="Enter your message here..."
+                              style="resize:none;width:85%;float:left;height:100%"></textarea>
+                    <button style="float:right;width:11%;height:112%"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui-layout-south" style="background-color:gray">
+    </div>
+    <div class="ui-layout-center">
+        <div title="Welcome to virtual class room" id="usernameprompt">
+            Please enter your chat name.
+            [All other chat users will be seeing this name]
+            <br />
+            <input type="text" id="username" style="width: 250px; margin: 10px 0" />
+        </div>
+    </div>
+</body>
+</html>
