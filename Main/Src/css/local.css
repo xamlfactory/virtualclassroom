@@ -1,23 +1,46 @@
-﻿body{
-    font-size:0.75em;
-    font-family:Verdana;
-    font-weight:normal;
-    font-style:normal
+﻿body {
+    font-size: 12px;
+    font-family: Verdana;
+    font-weight: normal;
+    font-style: normal;
 }
 
 
 .group_header {
-    background: #00aedb;
-    padding: 0.2em;
+    background: #007ACC;
+    padding: 0.3em;
     color: white;
 }
 
 .group_content {
-    border:solid 1px #00aedb;
-    right:0px;
-    left:0px;
+    border: solid 1px #01bbe2;
+    background-color: #F5F5F5;
+    right: 0px;
+    left: 0px;
 }
 
-span{
-    margin:2px;
+#selectable {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
 }
+
+    #selectable li {
+        margin: 3px;
+        padding: 0.4em;
+    }
+
+        #selectable li:hover {
+            background-color: gray;
+            color: white;
+        }
+
+    #selectable .ui-selecting {
+        background: #EEEEF2;
+    }
+
+    #selectable .ui-selected {
+        background: #3399FF;
+        color: white;
+    }

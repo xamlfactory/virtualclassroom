@@ -8,18 +8,26 @@ function chatMessage(sender, date, message) {
 }
 
 // Chat viewmodels
-function chatViewModel(socket) {
+function chatViewModel(socket, currentuser) {
     var self = this;
-    self.messages = ko.observableArray([
-        new chatMessage("Jawahar", formatTime($.now()), "Hi there sdfsdasd asd as d asd asd as d  as d asd asd as dasd as das d a"),
-        new chatMessage("Suresh", formatTime($.now()), "Hi there"),
-        new chatMessage("Jawahar", formatTime($.now()), "Hi there sdfsdasd asd as d asd asd as d  as d asd asd as dasd as das d a"),
-        new chatMessage("Suresh", formatTime($.now()), "Hi there"),
-        new chatMessage("Jawahar", formatTime($.now()), "Hi there sdfsdasd asd as d asd asd as d  as d asd asd as dasd as das d a"),
-        new chatMessage("Suresh", formatTime($.now()), "Hi there")
-    ]);
-    self.title = ko.observable("Chat Room");
-    self.websocket = socket;
+
+    self._socket = socket;
+    self.currentUser = ko.observable(currentuser);
+    self.messages = ko.observableArray();
+    self.currentMessage = ko.observable("");
+    self.selectedColor = ko.observable("red");
+
+    self.sendMessage = function () {
+        if (self.currentMessage()) {
+            self._socket.send(self.currentMessage());
+            self.currentMessage("");
+        }
+    }
+
+    self.onmessage = function (e) {
+        var newMessage = new chatMessage(self.currentUser(), formatTime($.now()), e.data);
+        self.messages.push(newMessage);
+    }
 }
 
 // Helper methods

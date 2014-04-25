@@ -8,26 +8,16 @@ namespace VirtualClassRoom.Server.Repo
 {
     public class DataRepository
     {
-        private static DataRepository instance = new DataRepository();
-
-        public DataRepository()
+        static DataRepository()
         {
-            instance.Users = new List<UserModel>();
+            Users = new List<UserModel>();
         }
 
-        public void Push(UserModel user)
+        public static void Push(UserModel user)
         {
-            instance.Users.Add(user);
+            Users.Add(user);
         }
         
-        public List<UserModel> Users { get; set; }
-
-        public static DataRepository Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
+        public static List<UserModel> Users { get; set; }
     }
 }

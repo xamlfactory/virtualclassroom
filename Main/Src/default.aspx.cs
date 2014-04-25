@@ -20,10 +20,5 @@ namespace VirtualClassRoom
             SocketServer server = new SocketServer();
             server.Start("1");
         }
-
-        protected void Unnamed_Click1(object sender, EventArgs e)
-        {
-
-        }
     }
 }

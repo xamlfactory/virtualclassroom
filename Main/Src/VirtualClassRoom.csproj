@@ -61,6 +61,21 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\local.css" />
+    <Content Include="css\metro\images\animated-overlay.gif" />
+    <Content Include="css\metro\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="css\metro\images\ui-bg_flat_15_6f756b_40x100.png" />
+    <Content Include="css\metro\images\ui-bg_flat_55_01bbe2_40x100.png" />
+    <Content Include="css\metro\images\ui-bg_flat_65_01bbe2_40x100.png" />
+    <Content Include="css\metro\images\ui-bg_flat_75_01bbe2_40x100.png" />
+    <Content Include="css\metro\images\ui-bg_flat_75_e6e6e6_40x100.png" />
+    <Content Include="css\metro\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="css\metro\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="css\metro\images\ui-icons_222222_256x240.png" />
+    <Content Include="css\metro\images\ui-icons_888888_256x240.png" />
+    <Content Include="css\metro\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="css\metro\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="css\metro\jquery-ui-1.10.4.custom.css" />
+    <Content Include="css\metro\jquery-ui-1.10.4.custom.min.css" />
     <Content Include="default.aspx" />
     <Content Include="packages.config" />
     <None Include="Web.Debug.config">
@@ -74,28 +89,10 @@
     <Content Include="Global.asax" />
     <Content Include="scripts\app.js" />
     <Content Include="scripts\chatviewmodel.js" />
+    <Content Include="scripts\dropdown.js" />
     <Content Include="scripts\jquery.layout-latest.js" />
+    <Content Include="scripts\stopwatch.js" />
     <Content Include="Server\Services\ClassRoomService.asmx" />
-    <Content Include="theme\css\metro-theme\images\animated-overlay.gif" />
-    <Content Include="theme\css\metro-theme\images\ui-bg_diagonals-medium_55_00aedb_40x40.png" />
-    <Content Include="theme\css\metro-theme\images\ui-bg_flat_0_010101_40x100.png" />
-    <Content Include="theme\css\metro-theme\images\ui-bg_flat_100_00aedb_40x100.png" />
-    <Content Include="theme\css\metro-theme\images\ui-bg_flat_100_ffffff_40x100.png" />
-    <Content Include="theme\css\metro-theme\images\ui-bg_flat_10_aaaaaa_40x100.png" />
-    <Content Include="theme\css\metro-theme\images\ui-bg_flat_65_00aedb_40x100.png" />
-    <Content Include="theme\css\metro-theme\images\ui-bg_flat_75_dadada_40x100.png" />
-    <Content Include="theme\css\metro-theme\images\ui-bg_flat_75_ffffff_40x100.png" />
-    <Content Include="theme\css\metro-theme\images\ui-bg_glass_95_fef1ec_1x400.png" />
-    <Content Include="theme\css\metro-theme\images\ui-icons_222222_256x240.png" />
-    <Content Include="theme\css\metro-theme\images\ui-icons_454545_256x240.png" />
-    <Content Include="theme\css\metro-theme\images\ui-icons_888888_256x240.png" />
-    <Content Include="theme\css\metro-theme\images\ui-icons_cd0a0a_256x240.png" />
-    <Content Include="theme\css\metro-theme\images\ui-icons_ffffff_256x240.png" />
-    <Content Include="theme\css\metro-theme\jquery-ui-1.10.4.custom.css" />
-    <Content Include="theme\css\metro-theme\jquery-ui-1.10.4.custom.min.css" />
-    <Content Include="theme\js\jquery-1.10.2.js" />
-    <Content Include="theme\js\jquery-ui-1.10.4.custom.js" />
-    <Content Include="theme\js\jquery-ui-1.10.4.custom.min.js" />
     <Content Include="virtualclassroom.html" />
     <Content Include="Web.config" />
   </ItemGroup>

@@ -21,7 +21,7 @@ namespace VirtualClassRoom.Server.Services
         [WebMethod]
         public List<UserModel> GetAllUsers()
         {
-            return DataRepository.Instance.Users;
+            return DataRepository.Users;
         }
     }
 }

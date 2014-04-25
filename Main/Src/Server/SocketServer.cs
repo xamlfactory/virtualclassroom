@@ -23,18 +23,18 @@ namespace VirtualClassRoom.Server
                     string username = path.Substring(1, path.Length - 1);
                     var user = new UserModel(socket);
                     user.Name = username;
-                    user.Path = path;
-                    DataRepository.Instance.Push(user);
+                    user.Id = socket.ConnectionInfo.Id.ToString();
+                    DataRepository.Push(user);
                 };
 
                 socket.OnClose += () =>
                 {
-                    DataRepository.Instance.Users.RemoveAll(t => t.Socket == socket);
+                    DataRepository.Users.RemoveAll(t => t.Socket == socket);
                 };
 
                 socket.OnMessage += (message) =>
                 {
-                    DataRepository.Instance.Users.ForEach(t => t.Socket.Send(message));
+                    DataRepository.Users.ForEach(t => t.Socket.Send(message));
                 };
             });
         }

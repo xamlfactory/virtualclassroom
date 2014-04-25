@@ -9,7 +9,7 @@
     <script type="text/javascript">
         function launchMeeting() {
             var link = 'http://localhost:12622/virtualclassroom.html';
-            window.open(link, '_blank', 'status=no,toolbar=no,menubar=no,location=yes,directories=no,resizable=yes,scrollbars=yes');
+            window.open(link, '_blank', 'status=no,toolbar=no,menubar=no,location=yes,directories=no,resizable=yes,scrollbars=yes,maximized=yes');
         };
     </script>
 </head>
