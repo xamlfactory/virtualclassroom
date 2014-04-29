@@ -2,115 +2,156 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-    <script src="http://knockoutjs.com/downloads/knockout-3.0.0.js"></script>
-    <script src="scripts/jquery.layout-latest.js"></script>
-    <script src="scripts/chatviewmodel.js"></script>
+    <script src="scripts/jquery-1.6.4.js"></script>
+    <script src="scripts/knockout-2.2.0.js"></script>
+    <script src="easy-ui/jquery.easyui.min.js"></script>
+
+    <!--Knockout scripts-->
+    <script src="scripts/model.js"></script>
     <script src="scripts/app.js"></script>
+    <script src="scripts/mainviewmodel.js"></script>
+    <script src="scripts/chatviewmodel.js"></script>
+
     <script src="scripts/stopwatch.js"></script>
     <script src="scripts/dropdown.js"></script>
     <link href="css/local.css" rel="stylesheet" />
-    <link href="css/metro/jquery-ui-1.10.4.custom.css" rel="stylesheet" />
-    <style>
-        .item {
-            float: left;
-            margin: 2px;
-            background-color: orange;
-            width: 15px;
-            height: 15px;
-            border: solid 1px transparent;
-        }
-
-            .item:hover {
-                border: solid 1px gray;
-            }
-
-        .selecteditem {
-            border: solid 1px red;
-        }
-
-        .container {
-            display: table;
-            width: 85px;
-            height: 130px;
-            background-color: white;
-            border: solid 1px gray;
-            margin: 0px;
-            box-shadow: 1px 1px 10px #888888;
-        }
-    </style>
+    <link href="easy-ui/themes/bootstrap/easyui.css" rel="stylesheet" />
+    <link href="easy-ui/themes/icon.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="ui-layout-north" style="background-color: #EEEEF2; border-bottom: solid 1px #007ACC">
-    </div>
-    <div class="ui-layout-east">
-        <div id="conferenceview" class="group_content" style="height:150px;position:absolute; top: 0px">
-            <div>
-                <div class="group_header">
-                    <span>Video Conference</span>
-                </div>
+
+    <div id="cc" class="easyui-layout" data-options="fit:true" style="min-height: 300px; min-width: 300px">
+        <div data-options="region:'north',split:false" style="height: 35px;">
+            <div class="easyui-panel" style="padding: 3px; border: 0px">
+                <a href="#" class="easyui-menubutton">File</a>
+                <a href="#" class="easyui-menubutton">Edit</a>
+                <a href="#" class="easyui-menubutton">Help</a>
             </div>
         </div>
-        <div id="usersview" class="group_content" style="top:150px;bottom:280px;position:absolute">
-            <div>
-                <div class="group_header">
-                    <span>Connected Users</span>
-                </div>
-                <ol id="selectable" data-bind="foreach: users">
-                    <li data-bind="text: name" />
-                </ol>
-            </div>
+        <div data-options="region:'south',split:false" style="height: 20px;">
+            <span id="status" style="left:5px;top:20%;position:absolute">
+            </span>
+            <span id="timer" style="right:5px;top:20%;position:absolute">
+            </span>
         </div>
-        <div id="chatview" class="group_content" style="height:280px;position:absolute;bottom:0px"
-             data-bind="with: chatViewModel">
-            <div class="group_header">
-                <span>Chat Room</span>
-            </div>
-            <div style="padding:1px">
-                <div data-bind="foreach: messages" style="height:150px;overflow:auto">
-                    <div style="margin:5px">
-                        <span style="font-weight:bold" data-bind="text: sender"></span>
-                        <span style="float:right;color:gray" data-bind="text: date"></span>
-                        <br />
-                        <span style="word-wrap:normal" data-bind="text: message"></span>
-                        <br />
-                        <br />
+        <div data-options="region:'east',split:true" style="width: 350px;">
+            <div class="easyui-layout" data-options="fit:true">
+                <div class="easyui-panel" data-options="region:'north',title: 'Video Chat', split:true" style="height: 260px">
+                    <div data-bind="foreach:users">
+                        <div>
+                            <div class="icon"
+                                 style="font-size:80px"></div>
+                        </div>
                     </div>
                 </div>
-                <div style="height:25px;margin:2px">
-                    <select data-bind="options: $parent.recipients, optionsText: 'name'"
-                            style="width:100px;height:21px;float:left"></select>
-                    <div style="height: 19px; width: 18px;float:left;border:solid gray 1px;margin:0px 2px 1px 2px">
-                        <div id="color" style="margin:2px;background-color:red;width:80%;height:80%"></div>
+                <div class="easyui-panel" data-options="region:'center',title: 'Connected Users', split:true" style="height: inherit">
+                    <ol id="selectable" data-bind="foreach: users">
+                        <li>
+                            <span class="icon"></span>
+                            <span data-bind="text: name"></span>
+                            <span data-bind="visible: isCurrentUser">(You)</span>
+                        </li>
+                    </ol>
+                </div>
+                <div data-bind="with: chatViewModel" data-options="region:'south',title: 'Chat Room', split:true" style="height: 240px">
+                    <div class="easyui-layout" data-options="fit:true" style="border:0px">
+                        <div data-options="region:'center'" style="border:0px">
+                            <div data-bind="foreach: messages" style="overflow:auto">
+                                <div style="margin:5px">
+                                    <span style="font-weight:bold" data-bind="text: sender"></span>
+                                    <span style="float:right;color:gray" data-bind="text: date"></span>
+                                    <br />
+                                    <span style="word-wrap:normal" data-bind="text: message"></span>
+                                    <br />
+                                    <br />
+                                </div>
+                            </div>
+                        </div>
+                        <div data-options="region:'south'" style="border:0px">
+                            <div class="easyui-layout" data-options="fit:true">
+                                <div data-options="region:'north'" style="height: 25px; border: 0px;margin:1px 1px 1px 1px">
+                                    <select data-bind="options: $parent.recipients, optionsText: 'name'"
+                                            style="width:100px;float:left;height:auto;margin:2px"></select>
+                                    <select style="float:left;height:auto;margin:2px"
+                                            data-bind="options: fontSizes,value: messageFontSize"></select>
+                                    <div style="width: 26px;float:left;border:solid gray 1px;margin:0px 2px 1px 2px;height:22px">
+                                        <div id="color" data-bind="value: messageColor" style="margin:2px;background-color:red;width:80%;height:80%"></div>
+                                    </div>
+                                    <div id="boldBtn" class="easyui-linkbutton"
+                                         data-options="toggle:true"
+                                         data-bind="click: toggleBold">
+                                        <div class="icon"></div>
+                                    </div>
+                                    <div class="easyui-linkbutton"
+                                         data-bind="click: toggleItalic"
+                                         data-options="toggle:true">
+                                        <div class="icon"></div>
+                                    </div>
+                                    <div class="easyui-linkbutton"
+                                         data-options="toggle:true">
+                                        <div class="icon"></div>
+                                    </div>
+                                </div>
+                                <div data-options="region:'center'" style="height:60px">
+                                    <div class="easyui-layout" data-options="fit:true">
+                                        <div data-options="region:'center'" style="border:0px;padding:2px">
+                                            <textarea rows="3" autofocus="autofocus"
+                                                      placeholder="Enter your message here..."
+                                                      data-bind="value: currentMessage, style:{'fontWeight': messageFontWeight(), 'fontStyle':messageFontStyle(), 'font-size': messageFontSize() + 'px'}"
+                                                      id="chatMessageArea"
+                                                      style="margin:0px;resize:none;width:95%;height:52px;overflow:no-content"></textarea>
+                                        </div>
+                                        <div data-options="region:'east'" style="border: 0px; width: 40px; padding: 2px">
+                                            <button class="easyui-linkbutton"
+                                                    style="float:right;width:100%;height:100%;margin:0px"
+                                                    data-bind="click: sendMessage">
+                                                <div class="icon">
+                                                    
+                                                </div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div style="height:65px;margin:2px;display:grid">
-                    <textarea rows="3" autofocus="autofocus" placeholder="Enter your message here..."
-                              data-bind="value: currentMessage"
-                              id="chatMessageArea"
-                              style="resize:none;width:85%;float:left;height:100%"></textarea>
-                    <button class="button"
-                            style="float:right;width:11%;height:112%"
-                            data-bind="click: sendMessage"></button>
+            </div>
+        </div>
+        <div data-options="region:'west',split:false" style="width: 30px;">
+            <div class="easyui-panel" style="padding: 0px; border: 0px; overflow: hidden; width: inherit">
+                <a href="#" class="easyui-linkbutton" style="width: 25px; margin: 1px" data-options="group:'g1', plain:true, toggle:true">B</a>
+                <a href="#" class="easyui-linkbutton" style="width: 25px; margin: 1px" data-options="group:'g1', plain:true, toggle:true">B</a>
+                <a href="#" class="easyui-linkbutton" style="width: 25px; margin: 1px" data-options="group:'g1', plain:true, toggle:true">B</a>
+                <a href="#" class="easyui-linkbutton" style="width: 25px; margin: 1px" data-options="group:'g1', plain:true, toggle:true">B</a>
+            </div>
+        </div>
+        <div data-options="region:'center'" style="padding: 5px; background: #eee;padding:0px;border:0px">
+            <div id="tt" class="easyui-tabs" data-options="fit:true">
+                <div title="Tab1" style="padding: 20px; display: none">
+
+                </div>
+                <div title="Tab2" data-options="closable:true" style="overflow: auto; padding: 20px; display: none;">
+                    tab2
+                </div>
+                <div title="Tab3" data-options="closable:true" style="padding: 20px; display: none;">
+                    tab3
+                </div>
+            </div>
+
+            <div>
+                <div title="Welcome to virtual class room" id="usernameprompt" data-options="modal:true"
+                     style="padding:10px;width:330px">
+                    <span>Please enter your chat name.</span>
+                    <br />
+                    <br />
+                    <input type="text" id="username" style="margin: 5px 0;width:280px" placeholder="All other chat users will be seeing this name" />
+                    <br />
+                    <br/>
+                    <div id="submit" class="easyui-linkbutton" style="right:0px;float:right">Submit</div>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="ui-layout-south" style="background-color: #EEEEF2; border-top: solid 1px #007ACC">
-        <span id="timer" style="right:5px;top:25%;position:absolute">
-        </span>
-    </div>
-
-    <div class="ui-layout-center">
-        <div title="Welcome to virtual class room" id="usernameprompt">
-            Please enter your chat name.
-            [All other chat users will be seeing this name]
-            <br />
-            <input type="text" id="username" style="width: 250px; margin: 10px 0" />
-        </div>
-    </div>
-
 </body>
 </html>

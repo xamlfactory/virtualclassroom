@@ -1,12 +1,4 @@
 ﻿
-// Chat Models
-function chatMessage(sender, date, message) {
-    var self = this;
-    self.sender = ko.observable(sender);
-    self.date = ko.observable(date);
-    self.message = ko.observable(message);
-}
-
 // Chat viewmodels
 function chatViewModel(socket, currentuser) {
     var self = this;
@@ -15,17 +7,58 @@ function chatViewModel(socket, currentuser) {
     self.currentUser = ko.observable(currentuser);
     self.messages = ko.observableArray();
     self.currentMessage = ko.observable("");
-    self.selectedColor = ko.observable("red");
+    self.messageColor = ko.observable();
+    self.messageFontWeight = ko.observable();
+    self.messageFontStyle = ko.observable();
+    self.fontSizes = [
+        6,
+        7,
+        8,
+        9,
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        25,
+        30
+    ];
+    self.messageFontSize = ko.observable(12);
 
     self.sendMessage = function () {
         if (self.currentMessage()) {
-            self._socket.send(self.currentMessage());
+            var messageData = {
+                "sender": self.currentUser(),
+                "message": self.currentMessage(),
+                "time": formatTime($.now())
+            };
+            self._socket.send(JSON.stringify(messageData));
             self.currentMessage("");
         }
     }
 
+    self.toggleBold = function () {
+        if (self.messageFontWeight() == "bold") {
+            self.messageFontWeight("normal");
+        }
+        else {
+            self.messageFontWeight("bold");
+        }
+    }
+
+    self.toggleItalic = function () {
+        if (self.messageFontStyle() == "italic") {
+            self.messageFontStyle("normal");
+        }
+        else {
+            self.messageFontStyle("italic");
+        }
+    }
+
     self.onmessage = function (e) {
-        var newMessage = new chatMessage(self.currentUser(), formatTime($.now()), e.data);
+        var data = JSON.parse(e.data);
+        var newMessage = new chatMessage(data.sender, data.time, data.message);
         self.messages.push(newMessage);
     }
 }

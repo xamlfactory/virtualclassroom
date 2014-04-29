@@ -5,18 +5,8 @@
     font-style: normal;
 }
 
-
-.group_header {
-    background: #007ACC;
-    padding: 0.3em;
-    color: white;
-}
-
-.group_content {
-    border: solid 1px #01bbe2;
-    background-color: #F5F5F5;
-    right: 0px;
-    left: 0px;
+div {
+    overflow: hidden;
 }
 
 #selectable {
@@ -44,3 +34,23 @@
         background: #3399FF;
         color: white;
     }
+
+.icon {
+    font-family: 'Segoe UI Symbol';
+}
+
+chat {
+    font-family: 'Segoe UI Symbol';
+    content: '';
+}
+
+#flash {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 5000;
+    width: 100%;
+    height: 500px;
+    background-color: #c00;
+    display: none;
+}
